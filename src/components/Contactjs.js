@@ -3,17 +3,30 @@ import React, { Component } from 'react';
 import './Contact.css';
 
 export default class Contactjs extends Component {
+  state = {
+    online: false,
+  };
+
+  isOnline = () => {
+    this.setState({ online: !this.state.online });
+  };
   render() {
     return (
       <div className='Contact'>
         <img className='avatar' src={this.props.avatar} alt='monsieur 1' />
         <div>
           <p className='name'>{this.props.name}</p>
-          <div className='status'>
+          <div
+            className='status'
+            style={{ cursor: 'pointer' }}
+            onClick={this.isOnline}
+          >
             <span
-              className={this.props.online ? 'status-online' : 'status-offline'}
+              className={this.state.online ? 'status-online' : 'status-offline'}
             ></span>
-            <p className='text'>{this.props.statusText}</p>
+            <p className='status-text'>
+              {this.state.online ? 'Online' : 'Offline'}
+            </p>
           </div>
         </div>
       </div>
